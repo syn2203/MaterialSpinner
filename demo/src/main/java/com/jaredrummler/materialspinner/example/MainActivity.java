@@ -31,52 +31,22 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 public class MainActivity extends AppCompatActivity {
 
   private static final String[] ANDROID_VERSIONS = {
-      "Cupcake",
-      "Donut",
-      "Eclair",
-      "Froyo",
-      "Gingerbread",
-      "Honeycomb",
-      "Ice Cream Sandwich",
-      "Jelly Bean",
-      "KitKat",
-      "Lollipop",
-      "Marshmallow",
-      "Nougat",
-      "Oreo"
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
   };
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-
-      @Override public void onClick(View view) {
-        try {
-          startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/MaterialSpinner")));
-        } catch (ActivityNotFoundException ignored) {
-        }
-      }
-    });
 
     MaterialSpinner spinner = (MaterialSpinner) findViewById(R.id.spinner);
     spinner.setItems(ANDROID_VERSIONS);
-    spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-      @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-        Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-      }
-    });
-    spinner.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-
-      @Override public void onNothingSelected(MaterialSpinner spinner) {
-        Snackbar.make(spinner, "Nothing selected", Snackbar.LENGTH_LONG).show();
-      }
-    });
+    spinner.setOnItemSelectedListener((MaterialSpinner.OnItemSelectedListener<String>) (view, position, id, item) -> Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show());
+    spinner.setOnNothingSelectedListener(spinner1 -> Snackbar.make(spinner1, "Nothing selected", Snackbar.LENGTH_LONG).show());
   }
 
 }

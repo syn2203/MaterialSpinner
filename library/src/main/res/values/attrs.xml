@@ -29,6 +29,7 @@
       <enum name="wrap_content" value="-2"/>
     </attr>
     <attr format="integer" name="ms_background_selector"/>
+    <attr format="integer" name="ms_background_selector_item"/>
     <attr format="dimension" name="ms_padding_top"/>
     <attr format="dimension" name="ms_padding_left"/>
     <attr format="dimension" name="ms_padding_bottom"/>
