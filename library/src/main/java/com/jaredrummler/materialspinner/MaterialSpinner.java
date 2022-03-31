@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class MaterialSpinner extends TextView {
     private int arrowColor;
     private int arrowColorDisabled;
     private int textColor;
+    private int textStyle;
+    private float textSize;
     private int hintColor;
     private int popupPaddingTop;
     private int popupPaddingLeft;
@@ -96,6 +99,8 @@ public class MaterialSpinner extends TextView {
             backgroundSelector = ta.getResourceId(R.styleable.MaterialSpinner_ms_background_selector, 0);
             backgroundSelectorItem = ta.getResourceId(R.styleable.MaterialSpinner_ms_background_selector_item, 0);
             textColor = ta.getColor(R.styleable.MaterialSpinner_ms_text_color, defaultColor);
+            textStyle = ta.getInteger(R.styleable.MaterialSpinner_ms_text_style, Typeface.NORMAL);
+            textSize = ta.getDimensionPixelSize(R.styleable.MaterialSpinner_ms_text_size, 10);
             hintColor = ta.getColor(R.styleable.MaterialSpinner_ms_hint_color, defaultColor);
             arrowColor = ta.getColor(R.styleable.MaterialSpinner_ms_arrow_tint, textColor);
             hideArrow = ta.getBoolean(R.styleable.MaterialSpinner_ms_hide_arrow, false);
@@ -294,7 +299,9 @@ public class MaterialSpinner extends TextView {
         adapter = new MaterialSpinnerAdapter<>(getContext(), items)
                 .setPopupPadding(popupPaddingLeft, popupPaddingTop, popupPaddingRight, popupPaddingBottom)
                 .setBackgroundSelector(backgroundSelectorItem)
-                .setTextColor(textColor);
+                .setTextColor(textColor)
+                .setTextStyle(textStyle)
+                .setTextSize(textSize);
         setAdapterInternal(adapter);
     }
 
@@ -302,13 +309,17 @@ public class MaterialSpinner extends TextView {
         this.adapter = new MaterialSpinnerAdapterWrapper(getContext(), adapter)
                 .setPopupPadding(popupPaddingLeft, popupPaddingTop, popupPaddingRight, popupPaddingBottom)
                 .setBackgroundSelector(backgroundSelectorItem)
-                .setTextColor(textColor);
+                .setTextColor(textColor)
+                .setTextStyle(textStyle)
+                .setTextSize(textSize);
         setAdapterInternal(this.adapter);
     }
 
     public <T> void setAdapter(MaterialSpinnerAdapter<T> adapter) {
         this.adapter = adapter;
         this.adapter.setTextColor(textColor);
+        this.adapter.setTextStyle(textStyle);
+        this.adapter.setTextSize(textSize);
         this.adapter.setBackgroundSelector(backgroundSelectorItem);
         this.adapter.setPopupPadding(popupPaddingLeft, popupPaddingTop, popupPaddingRight, popupPaddingBottom);
         setAdapterInternal(adapter);

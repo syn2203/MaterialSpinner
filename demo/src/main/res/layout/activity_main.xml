@@ -14,6 +14,8 @@
         android:textColor="@color/black"
         app:ms_arrow_tint="@color/black"
         app:ms_background_color="#fff"
+        app:ms_text_style="bold"
+        app:ms_text_size="8sp"
         app:ms_background_selector="@drawable/shape_corner_around"
         app:ms_dropdown_height="wrap_content"
         app:ms_dropdown_max_height="350dp"
